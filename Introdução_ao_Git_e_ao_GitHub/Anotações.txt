@@ -1,0 +1,83 @@
+Git e GitHub
+
+Instalar o Git link: https://git-scm.com/downloads
+1-Verificar se está marcado a integração com explorer (win), com Git Bash e o Git GUI
+2-Editor VIM
+3-Let Git decide ("master")
+4-Git Credential Manager Core
+No linux:
+# add-apt-repository ppa:git-core/ppa # apt update; apt install git
+
+terminal é o Git-Bash
+1-abrir a pasta e com o direito Gir Bash Here
+2-Inicializar  um repositório:
+git init
+3-para verificar (exibir pasta oculta .git):
+ls -a
+4-Configurar alguns dados pela primeira vez de forma global:
+git config --global user.email "seu email"
+git config --global user.name "seu nome"
+git config --global user.nickname "seu nickname"
+5-Alterar config:
+git config --list
+git config --global --unset user.email (remove user.email após é só repetir o passo 4)
+6-Criar um arquivo README.md (opcional) na raíz da pasta do projeto com algumas infos, utilizar o editor Typora.
+echo > README.md
+7-Adicionar arquivos ao git:
+git add *
+8-Commitar arquivos:
+git commit -m "texto sobre a versão"
+9-Verificar status (se tudo ok, tree clean):
+git status
+
+Trabalhar com o Git Hub
+No Pc, no Git Bash:
+1-criar par de chaves ssh privada(usada no pc) e publica(no site github) com email(obrigatório):
+ssh-keygen -t ed25519 -C seuemail
+2-Ir até a pasta aonde foram salvas as chaves para exibir seu conteúdo:
+cat id_ed25519.pub
+3-Copiar o conteúdo
+4-Após criar conta no Git hub, clicar na sua foto, settings, SSH keys, New SSH keys, dar um nome (pode ser do pc) e colar.
+5-ir no git bash e iniciar mandar o agente usar a chave:
+eval $(ssh-agente -s)
+ssh-add id_ed25519
+
+Fazer upload para o Git Hub
+No git hub
+1-clicar na sua foto, your repository, new repository
+2-digitar o mesmo nome da pasta do projeto
+3-copiar a string ssh do repositório
+No git Bash:
+1- na pasta do projeto, verificar o status e verificar se foi commitado
+git status
+git remote add origin enderco_ssh_do_repositorio_github_exemplo_abaixo
+git remote add origin git@github.com:jhenriquemlima/livro-receitas.git
+2-verificar se a variável origin tem o endereço correto
+git remote -v
+3-Fazer o upload:
+git push origin master
+
+Conflitos
+Ao fazer um push podem ocorrer conflitos entre a versão remota e a local, algum usuário pode ter editado a mesma linha que vc então existe um conflito quando o git tenta juntar as duas versões, ele informa o erro (Merge Conflit) e pede para vc baixar a versão da nuvem e verificar, nisso ele marca no código a versão da nuvem e a sua.
+1-baixar da nuvem
+git pull origin master
+2-Marcação recente
+<<<<<< HEAD
+"código recente"
+========
+3-Marcação anterior (remota), fica abaixo do =====
+=========
+"código antigo"
+>>>>> e1deeef3534234wewf...
+4-Após abrir e edtar o arquivo com conflito é só commitar e push nela
+git add *
+git commit -m "resolve conflito"
+git push origin master
+5-Pelo site é possível ver as alterações em cada commit clicando no arquivo
+
+Como clonar um repositório (Já vem como repositório, .Git com o versionamento e o apontamento (origin))
+1-Vá no repositório clique em code e copie a url
+2-No bash (CLI) vá até a pasta raíz dos seus projetos e 
+git clone URL
+3-Pode verificar entrando na pasta do projeto e verificar a pasta .Git
+ls -a

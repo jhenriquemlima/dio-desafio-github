@@ -1,2 +1,3 @@
 Este arquivo foi criado no GitHub com duas linhas (1 e 2).
-Com intuito de criar um conflito.
+Com intuito de criar um conflito e alterar.
+
